@@ -310,7 +310,8 @@
                     _td_span_h = _td_c.find('.td-time span:first'),
                     _td_span_m = _td_c.find('.td-time span:last'),
                     h,
-                    m;
+                    m,
+                    empty = false;
 
                 if (_td_input.val().length && !_td_options.setCurrentTime) {
 
@@ -343,6 +344,7 @@
                     }
 
                 } else {
+                    var empty = true;
 
                     if (!parseInt(_td_span_h.text())) h = _td_num(d.getHours());
                     else h = _td_num(_td_span_h.text());
@@ -361,6 +363,10 @@
                 _td_rotation(_td_event_deg);
                 _td_wheel_deg = _td_event_deg;
                 _td_init_deg = -1;
+
+                if (empty === true && _td_options.setCurrentTime === false) {
+                    _td_input.val('');
+                }
 
 
             }
